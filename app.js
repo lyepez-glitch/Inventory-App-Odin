@@ -1,9 +1,9 @@
 const express = require('express')
 const productController = require('./controllers/productController');
 const categoryController = require('./controllers/categoryController');
-
+require('dotenv').config();
 const app = express()
-const port = 3000 || 10000;
+const port = process.env.EPORT || 4000;
 const path = require('path');
 const bodyParser = require('body-parser')
 const categoryRouter = require("./routes/categoryRouter");
