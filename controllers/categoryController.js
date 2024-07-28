@@ -51,14 +51,14 @@ async function updateCategoryPost(req, res) {
 
     const { category } = req.body;
     const { id } = req.params;
-    // const linkedProds = await db.getCatProducts(category);
-    // console.log("linkedProds", linkedProds)
+
     await db.updateCategory(id, category);
 
     res.redirect("/categories");
 }
 async function updateCategoryGet(req, res) {
     const { id } = req.params;
+    console.log(59, id)
     const cat = await db.findCatById(id);
     console.log(60, cat, id)
 

@@ -15,6 +15,7 @@ async function findCatByName(name) {
     return rows;
 }
 async function findCatById(id) {
+    console.log(18, id)
     const { rows } = await pool.query("SELECT name FROM categories where id=$1", [id]);
     return rows;
 }

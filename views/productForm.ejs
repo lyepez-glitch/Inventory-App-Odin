@@ -10,7 +10,7 @@
 
    <% if (edit) { %>
    <h1>Edit Product</h1>
-      <form method="POST" action="/categories/products/edit/<%=product.id%>">
+      <form method="POST" class="bg-cyan-300 outline-inherit border-8 border-black" action="/categories/products/edit/<%=product.id%>">
         <label for="name">Name:</label><br>
           <input value = "<%=product.name%>" type="text" id="name" name="name"><br>
           <label for="category">Category:</label><br>

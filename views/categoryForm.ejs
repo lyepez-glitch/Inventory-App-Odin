@@ -9,7 +9,7 @@
 
    <% if (edit) { %>
    <h1>Edit Category</h1>
-      <form method="POST" action="/categories/edit/<%=id%>">
+      <form class = "bg-cyan-300 outline-inherit border-8 border-black"method="POST" action="/categories/edit/<%=id%>">
         <label for="category">Name:</label><br>
           <input value = "<%=category.name%>" type="text" id="category" name="category"><br>
           <input type="submit" value="Submit">
@@ -17,7 +17,7 @@
   <% } %>
 <% if (!edit) { %>
 <h1>Create a New Category</h1>
-  <form method="POST" action="/categories/new">
+  <form method="POST" class = "bg-cyan-300 outline-inherit border-8 border-black" action="/categories/new">
     <label for="newCat">Name:</label><br>
       <input type="text" id="newCat" name="newCat"><br>
 
