@@ -32,7 +32,25 @@ async function updateCategory(id, name) {
     const qry = `UPDATE categories SET name=($1) where id=$2`;
 
 
+    const cat = await findCatById(id);
+    console.log('cat=>', cat[0].name);
+    const og = cat[0].name;
+
+    const linkedProds = await getCatProducts(og);
     await pool.query(qry, [name, id]);
+
+    console.log("linkedProds", linkedProds)
+    const queries = linkedProds.map(async(product) => {
+        console.log("name", name, "og", og)
+        const qry = `UPDATE products SET category=$1 WHERE category = $2 and name=$3`;
+        const updated = await pool.query(qry, [name, og, product.name]);
+        console.log("updated", updated)
+    })
+    const result = await Promise.all(queries);
+    console.log("result", result)
+
+
+
 }
 async function deleteCategory(id) {
     const qry = `DELETE FROM categories WHERE id=($1)`;
