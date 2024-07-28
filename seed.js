@@ -8,7 +8,7 @@ let SQL = '';
 async function main() {
     console.log("seeding...");
     const client = new Client({
-        connectionString: `postgresql://${process.env.ROLE}:${process.env.password}@localhost:${process.env.PORT}/${process.env.DATABASE}`,
+        connectionString: `postgresql://${process.env.ROLE}:${process.env.PASSWORD}@localhost:${process.env.PORT}/${process.env.DATABASE}`,
     });
     await client.connect();
 
