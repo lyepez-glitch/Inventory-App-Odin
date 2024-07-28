@@ -3,7 +3,7 @@ const productController = require('./controllers/productController');
 const categoryController = require('./controllers/categoryController');
 
 const app = express()
-const port = 3000;
+const port = 3000 || 10000;
 const path = require('path');
 const bodyParser = require('body-parser')
 const categoryRouter = require("./routes/categoryRouter");
