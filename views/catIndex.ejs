@@ -2,23 +2,28 @@
 <html>
   <head>
     <title>Homepage</title>
-    <link rel="stylesheet" href="styles.css">
+     <link href="/tailwind.css" rel="stylesheet">
+     <link href="styles.css" rel="stylesheet">
   </head>
-  <body>
-   <h1>Home</h1>
+  <body class = "bg-lime-200">
+   <h1 class = "text-center">Home</h1>
 
-   <a href="/categories/new">Click here to add a Category</a>
+
+
+  </h1>
+   <a class = "font-bold text-blue-600" underline" href="/categories/new">Click here to add a Category</a>
+   <div class="gridContainer " id="catWrapper">
    <% categories.forEach(function(cat){ %>
-        <div id="catCont">
-          <a id = "catName" href="/categories/products?name=<%= cat.name %>"><div> Name: <%= cat.name %> </div></a>
+        <div class = "grid-item bg-cyan-300 outline-inherit border-8 border-black" id="catCont">
+          <a  class="text-center" id = "catName" href="/categories/products?name=<%= cat.name %>"><div> Name: <%= cat.name %> </div></a>
 
-          <button id = "open"><a target="_blank" href="/categories/edit/<%= cat.id %>">Open</a></button>
-           <button id = "delete"><a href="/categories/delete/<%= cat.id %>">Delete</a></button>
+          <button class = "rounded-full text-white w-20 bg-gray-400 border-8 border-black" id = "open"><a target="_blank" href="/categories/edit/<%= cat.id %>">Open</a></button>
+           <button class = " w-20 rounded-full bg-gray-400 text-white border-8 border-black" id = "delete"><a href="/categories/delete/<%= cat.id %>">Delete</a></button>
         </div>
 
 
   <% }); %>
-
+   <div>
 
   </body>
 </html>
