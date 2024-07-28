@@ -1,0 +1,36 @@
+<!-- index.ejs -->
+<html>
+  <head>
+    <title>Homepage</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+   <h1>Home</h1>
+   <a href="./products/new">Click here to add a Product</a>
+   <a href="./categories/new">Click here to add a Category</a>
+   <% products.forEach(function(product){ %>
+        <div id="prodCont">
+          <div> Name: <%= product.name %> </div>
+          <div> Price: <%= product.price %> </div>
+          <div> Brand: <%= product.brand %> </div>
+          <div> Category: <%= product.category %> </div>
+          <% if (product.reviews) { %>
+          <h3>Reviews</h3>
+            <ul>
+
+                <% product.reviews.forEach(function(review) { %>
+                    <li><%= review.id %>: <%= review.review_txt %></li>
+                <% }); %>
+            </ul>
+          <% } %>
+
+          <button id = "open"><a target="_blank" href="/categories/products/edit/<%= product.id %>">Open</a></button>
+           <button id = "delete"><a href="/categories/products/delete/<%= product.id %>">Delete</a></button>
+        </div>
+
+
+  <% }); %>
+
+
+  </body>
+</html>

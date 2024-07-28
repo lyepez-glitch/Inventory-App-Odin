@@ -1,0 +1,24 @@
+<!-- catIndex.ejs -->
+<html>
+  <head>
+    <title>Homepage</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+   <h1>Home</h1>
+
+   <a href="/categories/new">Click here to add a Category</a>
+   <% categories.forEach(function(cat){ %>
+        <div id="catCont">
+          <a id = "catName" href="/categories/products?name=<%= cat.name %>"><div> Name: <%= cat.name %> </div></a>
+
+          <button id = "open"><a target="_blank" href="/categories/edit/<%= cat.id %>">Open</a></button>
+           <button id = "delete"><a href="/categories/delete/<%= cat.id %>">Delete</a></button>
+        </div>
+
+
+  <% }); %>
+
+
+  </body>
+</html>

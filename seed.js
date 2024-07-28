@@ -2,7 +2,7 @@
 require('dotenv').config();
 const axios = require('axios');
 const { Client } = require("pg");
-
+const db = require('./db/categoryQueries');
 let SQL = '';
 
 async function main() {
@@ -14,45 +14,49 @@ async function main() {
 
     console.log("done");
     try {
+
         const response = await axios.get('https://dummyjson.com/products?limit=100');
-        console.log('response', response.data);
+
         const products = response.data["products"];
 
-        // console.log(Array.isArray(products))
+
         const queries = products.map(async(product) => {
+            const foundCat = await db.findCatByName(product.category);
 
 
-            const product_id = product.id;
-            const product_name = product.title || "none";
+            let cat;
+            let cat_id;
+
+            let qry = `SELECT id FROM categories WHERE name=$1`
+
+            cat = await client.query(qry, [product.category]);
+
+            if (cat.rows.length === 0) {
+                qry = `INSERT INTO categories(name)
+                   VALUES ($1) RETURNING id;`
+
+                cat = await client.query(qry, [product.category]);
+                cat_id = cat.rows[0].id;
+
+            } else {
+
+                cat_id = cat.rows[0].id;
+
+            }
+            console.log(' cat.rows', cat.rows)
+
+
+            const product_name = product.title;
             const price = parseInt(product.price) || 0;
-            const brand = product.brand || "none";
-            const category = product.category || "none";
-            const review = product.reviews[0] || "none";
-            // console.log(product_id, product)
-
-
-            let qry = `INSERT INTO categories(id,name)
-                VALUES ($1,$2);`
-            let vals = [product_id, category]
-            await client.query(qry, vals);
-
-            qry = `INSERT INTO brands(id,name)
-                VALUES ($1,$2);`
-
-            await client.query(qry, [product_id, brand]);
-            qry = `INSERT INTO reviews(id, review_txt)
-                VALUES
-                    ($1,$2);`
-            await client.query(qry, [product_id, review]);
 
             qry =
-                `INSERT INTO products(id, name, price, brand, category, review)
+                `INSERT INTO products(name, price, category)
                 VALUES
-                    ($1,$2,$3,$4,$5,$6);
+                    ($1,$2,$3) RETURNING id;
                  `
-            console.log("prod id", product_id)
-            vals = [product_id, product_name, price, product_id, product_id, product_id]
+            vals = [product_name, price, product.category]
             await client.query(qry, vals);
+
         })
 
         await Promise.all(queries);

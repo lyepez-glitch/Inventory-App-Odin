@@ -1,0 +1,42 @@
+<!-- form.ejs -->
+<html>
+  <head>
+    <title>New Message</title>
+
+  </head>
+  <body>
+
+   <% if (edit) { %>
+   <h1>Edit Product</h1>
+      <form method="POST" action="/categories/products/edit/<%=product.id%>">
+        <label for="name">Name:</label><br>
+          <input value = "<%=product.name%>" type="text" id="name" name="name"><br>
+          <label for="category">Category:</label><br>
+          <input value = "<%=product.category%>"type="text" id="category" name="category"><br>
+           <label for="category">Price:</label><br>
+          <input value = "<%=product.price%>"type="text" id="price" name="price"><br>
+
+
+
+          <input type="submit" value="Submit">
+      </form>
+  <% } %>
+<% if (!edit) { %>
+<h1>Create a New Product</h1>
+  <form method="POST" action="/categories/products/new">
+    <label for="name">Name:</label><br>
+      <input type="text" id="name" name="name"><br>
+      <label for="category">Category:</label><br>
+      <input type="category" id="category" name="category"><br>
+      <label for="price">Price:</label><br>
+      <input type="price" id="price" name="price"><br>
+
+
+
+      <input type="submit" value="Submit">
+  </form>
+<% } %>
+
+
+  </body>
+</html>
